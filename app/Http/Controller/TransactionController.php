@@ -91,8 +91,11 @@ class TransactionController extends Controller
             'count' => 'required',
             'price' => 'required',
         ]);
+
+        $data = $request->all();
+        $data['paid'] = $data['count']*$data['price'];
   
-        $transaction->update($request->all());
+        $transaction->update($data);
   
         return redirect()->route('transactions.index')
                         ->with('success','Transaction updated successfully');
